@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Election Guide - A smart, step-by-step guide to the electoral process powered by AI.">
+    <title>Election Guide | AI Assistant</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="main-nav glass-panel">
+            <div class="brand">
+                <div class="logo-icon">🗳️</div>
+                <h1>Election<span class="highlight">Guide</span></h1>
+            </div>
+            
+            <ul class="nav-links">
+                <li><button class="nav-btn active" data-view="home" aria-label="Home"><i class="ri-home-5-line"></i><span>Home</span></button></li>
+                <li><button class="nav-btn" data-view="chat" aria-label="Assistant"><i class="ri-robot-2-line"></i><span>Assistant</span></button></li>
+                <li><button class="nav-btn" data-view="timeline" aria-label="Timeline"><i class="ri-git-commit-line"></i><span>Timeline</span></button></li>
+                <li><button class="nav-btn" data-view="quiz" aria-label="Quiz"><i class="ri-medal-line"></i><span>Quiz</span></button></li>
+                <li><button class="nav-btn" data-view="faq" aria-label="FAQs"><i class="ri-question-answer-line"></i><span>FAQs</span></button></li>
+            </ul>
+
+            <div class="user-settings">
+                <button class="settings-btn" aria-label="Location"><i class="ri-map-pin-line"></i> <span id="location-display">India</span></button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- HOME VIEW -->
+            <section id="view-home" class="view-section active">
+                <div class="hero-section">
+                    <div class="welcome-badge fade-in">Hello, Citizen 👋</div>
+                    <h2 class="hero-title slide-up">Ready to understand <span class="highlight-text">Democracy?</span></h2>
+                    <p class="hero-subtitle slide-up-delay">Your smart, step-by-step guide to the electoral process.</p>
+                </div>
+
+                <div class="quick-actions-grid">
+                    <div class="action-card glass-panel hover-lift" onclick="app.switchView('chat')">
+                        <div class="card-icon blue"><i class="ri-robot-2-fill"></i></div>
+                        <h3>Ask AI Tutor</h3>
+                        <p>Got questions? Let's chat about voting, rules, and rights.</p>
+                        <span class="card-arrow"><i class="ri-arrow-right-line"></i></span>
+                    </div>
+
+                    <div class="action-card glass-panel hover-lift" onclick="app.switchView('timeline')">
+                        <div class="card-icon purple"><i class="ri-route-fill"></i></div>
+                        <h3>Election Timeline</h3>
+                        <p>See the journey from registration to results.</p>
+                        <span class="card-arrow"><i class="ri-arrow-right-line"></i></span>
+                    </div>
+
+                    <div class="action-card glass-panel hover-lift" onclick="app.switchView('quiz')">
+                        <div class="card-icon orange"><i class="ri-trophy-fill"></i></div>
+                        <h3>Test Your Knowledge</h3>
+                        <p>Take quick quizzes and earn civic badges.</p>
+                        <span class="card-arrow"><i class="ri-arrow-right-line"></i></span>
+                    </div>
+                </div>
+
+                <div class="progress-widget glass-panel hover-lift">
+                    <div class="progress-header">
+                        <h3>Your Learning Journey</h3>
+                        <span id="overall-progress-text">25%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="overall-progress-bar" style="width: 25%"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <span class="step completed">Basics</span>
+                        <span class="step active">Registration</span>
+                        <span class="step">Voting</span>
+                        <span class="step">Results</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAT VIEW -->
+            <section id="view-chat" class="view-section">
+                <div class="chat-container glass-panel">
+                    <div class="chat-header">
+                        <div class="ai-avatar"><i class="ri-robot-2-fill"></i></div>
+                        <div class="ai-info">
+                            <h3>GuideBot</h3>
+                            <span class="status"><span class="dot"></span> Online</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages injected by JS -->
+                        <div class="message ai-message pop-in">
+                            <div class="message-content">
+                                <p>Hi there! I'm your Election Guide. I can help you understand the voting process.</p>
+                                <p>What would you like to explore today?</p>
+                                <div class="quick-chips">
+                                    <button class="chip">📝 How to register?</button>
+                                    <button class="chip">🗳️ Voting process</button>
+                                    <button class="chip">📅 Key Dates</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <form id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Ask anything about elections..." autocomplete="off">
+                            <button type="submit" class="send-btn" aria-label="Send Message"><i class="ri-send-plane-fill"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMELINE VIEW -->
+            <section id="view-timeline" class="view-section">
+                <header class="section-header">
+                    <h2 class="slide-up">Election <span class="highlight-text">Lifecycle</span></h2>
+                    <p class="slide-up-delay">Understanding the phases of a democratic election.</p>
+                </header>
+
+                <div class="timeline-container">
+                    <div class="timeline-slider glass-panel hover-lift">
+                        <div class="timeline-track">
+                            <div class="timeline-node active">
+                                <div class="node-icon"><i class="ri-user-add-line"></i></div>
+                                <div class="node-content">
+                                    <h4>Voter Registration</h4>
+                                    <p>Getting added to the electoral roll.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-connector active"></div>
+                            
+                            <div class="timeline-node">
+                                <div class="node-icon"><i class="ri-file-paper-2-line"></i></div>
+                                <div class="node-content">
+                                    <h4>Notification & Nomination</h4>
+                                    <p>Candidates file their papers.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-connector"></div>
+
+                            <div class="timeline-node">
+                                <div class="node-icon"><i class="ri-megaphone-line"></i></div>
+                                <div class="node-content">
+                                    <h4>Model Code of Conduct & Campaigning</h4>
+                                    <p>Parties present their manifestos.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-connector"></div>
+                            
+                            <div class="timeline-node">
+                                <div class="node-icon"><i class="ri-volume-mute-line"></i></div>
+                                <div class="node-content">
+                                    <h4>Silence Period</h4>
+                                    <p>Campaigning stops 48 hours before polling.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-connector"></div>
+
+                            <div class="timeline-node">
+                                <div class="node-icon"><i class="ri-inbox-archive-line"></i></div>
+                                <div class="node-content">
+                                    <h4>Polling Day</h4>
+                                    <p>Citizens cast their votes secretly.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-connector"></div>
+
+                            <div class="timeline-node">
+                                <div class="node-icon"><i class="ri-bar-chart-box-line"></i></div>
+                                <div class="node-content">
+                                    <h4>Counting & Results</h4>
+                                    <p>Votes are tallied and winners declared.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="phase-details glass-panel hover-lift" id="phase-details">
+                        <h3 class="pop-in">Voter Registration</h3>
+                        <p class="pop-in">The first step is getting your name on the Electoral Roll. You need to fill Form 6 if you are a new voter.</p>
+                        <button class="action-btn pop-in mt-4" onclick="app.chatAbout('How to register to vote?')">Ask how to register</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUIZ VIEW -->
+            <section id="view-quiz" class="view-section">
+                <header class="section-header">
+                    <h2 class="slide-up">Civic <span class="highlight-text">Challenges</span></h2>
+                    <p class="slide-up-delay">Test your knowledge and earn badges.</p>
+                </header>
+
+                <div class="badges-showcase glass-panel hover-lift">
+                    <h3>Your Badges</h3>
+                    <div class="badges-grid" id="badges-grid">
+                        <div class="badge-item earned">
+                            <div class="badge-icon"><i class="ri-star-smile-fill"></i></div>
+                            <span>Beginner</span>
+                        </div>
+                        <div class="badge-item locked">
+                            <div class="badge-icon"><i class="ri-shield-user-fill"></i></div>
+                            <span>Registered</span>
+                        </div>
+                        <div class="badge-item locked">
+                            <div class="badge-icon"><i class="ri-government-fill"></i></div>
+                            <span>Democracy Pro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container glass-panel hover-lift mt-4">
+                    <div class="quiz-state-start">
+                        <h3>Ready for a challenge?</h3>
+                        <p>Complete quizzes to unlock badges and prove your civic knowledge.</p>
+                        <button class="primary-btn mt-4" onclick="app.startQuiz()">Start Quiz</button>
+                    </div>
+                    <div class="quiz-state-active" style="display: none;">
+                        <div class="quiz-header">
+                            <span class="question-count" id="quiz-progress-text">Question 1 of 3</span>
+                            <div class="quiz-progress-track">
+                                <div class="quiz-progress-fill" id="quiz-progress-bar" style="width: 33%"></div>
+                            </div>
+                        </div>
+                        <h3 class="question-text" id="quiz-question-text">What is the minimum voting age in India?</h3>
+                        <div class="options-list" id="quiz-options">
+                            <!-- Options injected by JS -->
+                        </div>
+                        <div class="quiz-explanation mt-4" id="quiz-explanation" style="display: none;">
+                            <div class="explanation-icon"><i class="ri-lightbulb-flash-line"></i></div>
+                            <div class="explanation-content">
+                                <h4>Did you know?</h4>
+                                <p id="quiz-explanation-text">Explanation text will appear here.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quiz-state-result" style="display: none; text-align: center;">
+                        <div class="result-icon mb-4"><i class="ri-award-fill" style="font-size: 4rem; color: #f59e0b;"></i></div>
+                        <h3 id="quiz-result-title">Quiz Completed!</h3>
+                        <p id="quiz-result-desc">Great job testing your knowledge.</p>
+                        <button class="primary-btn mt-4" onclick="app.resetQuiz()">Try Another Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ VIEW -->
+            <section id="view-faq" class="view-section">
+                <header class="section-header">
+                    <h2 class="slide-up">Myth vs <span class="highlight-text">Fact</span></h2>
+                    <p class="slide-up-delay">Clearing common misconceptions about the electoral process.</p>
+                </header>
+
+                <div class="faq-container">
+                    <div class="faq-item glass-panel hover-lift">
+                        <div class="faq-question">
+                            <h3><i class="ri-question-mark"></i> Myth: My vote doesn't really matter.</h3>
+                            <button class="faq-toggle"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Fact:</strong> Every single vote counts! Many local and national elections have been decided by incredibly narrow margins. Your vote is your voice in shaping the future.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-panel hover-lift">
+                        <div class="faq-question">
+                            <h3><i class="ri-question-mark"></i> Myth: I can vote with just my Aadhaar card even if I'm not registered.</h3>
+                            <button class="faq-toggle"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Fact:</strong> No, you MUST be registered on the electoral roll. An ID card like Aadhaar or Voter ID is used to verify your identity at the polling station, but it does not replace the requirement of being registered.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-panel hover-lift">
+                        <div class="faq-question">
+                            <h3><i class="ri-question-mark"></i> Myth: Electronic Voting Machines (EVMs) can be hacked through the internet.</h3>
+                            <button class="faq-toggle"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Fact:</strong> EVMs are standalone, non-networked devices. They do not have any wireless communication capabilities like Wi-Fi or Bluetooth, making remote hacking impossible.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item glass-panel hover-lift">
+                        <div class="faq-question">
+                            <h3><i class="ri-question-mark"></i> Question: What is NOTA?</h3>
+                            <button class="faq-toggle"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Answer:</strong> NOTA stands for "None of the Above". It is an option on the EVM that allows a voter to officially register a vote of rejection for all candidates contesting in that constituency.</p>
+                        </div>
+                    </div>
+                    
+                     <div class="faq-item glass-panel hover-lift">
+                        <div class="faq-question">
+                            <h3><i class="ri-question-mark"></i> Question: Can Non-Resident Indians (NRIs) vote?</h3>
+                            <button class="faq-toggle"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Answer:</strong> Yes, Indian citizens living abroad who have not acquired citizenship of any other country are eligible to be registered as voters in their home constituency. They need to fill Form 6A.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
